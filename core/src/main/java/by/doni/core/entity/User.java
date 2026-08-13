@@ -31,6 +31,9 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Set<RoleType> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Post> posts = new HashSet<>();
+
     public User(String username, String password, RoleType role) {
         this.username = username;
         this.password = password;
