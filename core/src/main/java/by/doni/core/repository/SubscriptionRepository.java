@@ -17,10 +17,10 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
             """)
     List<User> findFollowersByFolloweeId(@Param("followeeId") Long followeeId);
 
-    boolean existsByFollowerId(Long followerId, Long followeeId);
+    boolean existsByFollowerIdAndFolloweeId(Long followerId, Long followeeId);
 
     void deleteByFollowerIdAndFolloweeId(Long followerId, Long followeeId);
 
-    int deleteAllByFolloweeIdOrFollowerId(Long followeeId, Long followerId);
+    int deleteAllByFollowerIdOrFolloweeId(Long followerId, Long followeeId);
 
 }
