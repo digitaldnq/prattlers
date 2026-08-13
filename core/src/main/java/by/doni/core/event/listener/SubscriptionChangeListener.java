@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class SubscriptionChangeListener {
 
     @EventListener
-    public void OnEvent(SubscriptionChangeListener event) {
+    public void OnEvent(SubscriptionChangeApplicationEvent event) {
         log.info("Get event for subscription change: {}", event);
     }
 
