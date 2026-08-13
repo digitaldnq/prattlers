@@ -31,4 +31,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new UserDto(createdUser.getId(), createdUser.getUsername()));
     }
+
+    @DeleteMapping("/{userId")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteUserById(@PathVariable Long userId) {
+        userService.deleteById(userId);
+        return ResponseEntity.noContent().build();
+    }
 }
