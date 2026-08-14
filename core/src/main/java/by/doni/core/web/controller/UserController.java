@@ -32,7 +32,7 @@ public class UserController {
                 .body(new UserDto(createdUser.getId(), createdUser.getUsername()));
     }
 
-    @DeleteMapping("/{userId")
+    @DeleteMapping("/{userId}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteUserById(@PathVariable Long userId) {
         userService.deleteById(userId);
