@@ -22,7 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfiguration {
 
     @Bean
-    public UserDetailsService inMemoryDetailsService() {
+    public UserDetailsService inMemoryUserDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername("core_service")
                 .password("{noop}12345")
@@ -34,10 +34,10 @@ public class WebSecurityConfiguration {
     @Bean
     public AuthenticationManager inMemoryAuthenticationManager(
             HttpSecurity http,
-            UserDetailsService inMemoryUserDetailService
+            UserDetailsService inMemoryUserDetailsService
     ) throws Exception {
         var authManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authManagerBuilder.userDetailsService(inMemoryUserDetailService);
+        authManagerBuilder.userDetailsService(inMemoryUserDetailsService);
         return authManagerBuilder.build();
     }
 
