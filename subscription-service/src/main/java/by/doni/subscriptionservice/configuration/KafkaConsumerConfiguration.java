@@ -25,7 +25,7 @@ public class KafkaConsumerConfiguration {
     private String groupId;
 
     @Bean
-    public ConsumerFactory<String, CreatePostKafkaEvent> kafkaCreatePostConsumerEvent(ObjectMapper objectMapper) {
+    public ConsumerFactory<String, CreatePostKafkaEvent> kafkaCreatePostConsumerFactory(ObjectMapper objectMapper) {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
@@ -39,12 +39,12 @@ public class KafkaConsumerConfiguration {
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, CreatePostKafkaEvent> createPostKafkaListenerContainerFactory(
-            ConsumerFactory<String, CreatePostKafkaEvent> kafkaEventConsumerFactory
+            ConsumerFactory<String, CreatePostKafkaEvent> kafkaConsumerFactory
     ) {
         ConcurrentKafkaListenerContainerFactory<String, CreatePostKafkaEvent> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
 
-        factory.setConsumerFactory(kafkaEventConsumerFactory);
+        factory.setConsumerFactory(kafkaConsumerFactory);
         return factory;
     }
 
