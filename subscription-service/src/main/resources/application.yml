@@ -3,7 +3,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://root:root@localhost27017/subscription_db?authSource=admin
+      uri: mongodb://root:root@localhost:27017/subscription_db?authSource=admin
   kafka:
     bootstrap-servers: localhost:9092
 
