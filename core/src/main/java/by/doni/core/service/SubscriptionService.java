@@ -29,7 +29,7 @@ public class SubscriptionService {
     private final ApplicationEventPublisher publisher;
 
     @Transactional
-    @CacheEvict(value = "userSubscriptions", key = "followeeId")
+    @CacheEvict(value = "userSubscriptions", key = "#followeeId")
     public void subscribe(Long followerId, Long followeeId) {
 
         if (followerId == null || followeeId == null) {
@@ -54,7 +54,7 @@ public class SubscriptionService {
     }
 
     @Transactional
-    @CacheEvict(value = "userSubscriptions", key = "followeeId")
+    @CacheEvict(value = "userSubscriptions", key = "#followeeId")
     public void unsubscribe(Long followerId, Long followeeId) {
 
         if (followerId == null || followeeId == null) {
