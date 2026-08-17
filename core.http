@@ -1,0 +1,163 @@
+### Create User 1
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "password1",
+  "role": "ROLE_USER"
+}
+
+### Create User 2
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "password": "password2",
+  "role": "ROLE_USER"
+}
+
+### Create User 3
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "user3",
+  "password": "password3",
+  "role": "ROLE_USER"
+}
+
+### Create User 4
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "user4",
+  "password": "password4",
+  "role": "ROLE_USER"
+}
+
+### Create Admin User
+POST http://localhost:8080/api/v1/users
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "adminpassword",
+  "role": "ROLE_ADMIN"
+}
+
+
+### User 1 subscribes to User 2
+POST http://localhost:8080/api/v1/subscriptions/subscribe?followeeId=2
+Authorization: Basic dXNlcjE6cGFzc3dvcmQx
+
+### User 1 subscribes to User 3
+POST http://localhost:8080/api/v1/subscriptions/subscribe?followeeId=3
+Authorization: Basic dXNlcjE6cGFzc3dvcmQx
+
+### User 2 subscribes to User 3
+POST http://localhost:8080/api/v1/subscriptions/subscribe?followeeId=3
+Authorization: Basic dXNlcjI6cGFzc3dvcmQy
+
+### User 2 subscribes to User 4
+POST http://localhost:8080/api/v1/subscriptions/subscribe?followeeId=4
+Authorization: Basic dXNlcjI6cGFzc3dvcmQy
+
+### User 3 subscribes to User 1
+POST http://localhost:8080/api/v1/subscriptions/subscribe?followeeId=1
+Authorization: Basic dXNlcjM6cGFzc3dvcmQz
+
+### User 3 subscribes to User 4
+POST http://localhost:8080/api/v1/subscriptions/subscribe?followeeId=4
+Authorization: Basic dXNlcjM6cGFzc3dvcmQz
+
+### User 4 subscribes to User 1
+POST http://localhost:8080/api/v1/subscriptions/subscribe?followeeId=1
+Authorization: Basic dXNlcjQ6cGFzc3dvcmQ0
+
+### User 4 subscribes to User 2
+POST http://localhost:8080/api/v1/subscriptions/subscribe?followeeId=2
+Authorization: Basic dXNlcjQ6cGFzc3dvcmQ0
+
+
+### Create Post 1 by User 1
+POST http://localhost:8080/api/v1/posts
+Authorization: Basic dXNlcjE6cGFzc3dvcmQx
+Content-Type: application/json
+
+{
+  "text": "This is the first post by User 1",
+  "tag": "#tag1"
+}
+
+### Create Post 2 by User 1
+POST http://localhost:8080/api/v1/posts
+Authorization: Basic dXNlcjE6cGFzc3dvcmQx
+Content-Type: application/json
+
+{
+  "text": "This is the second post by User 1",
+  "tag": "#tag2"
+}
+
+### Create Post 1 by User 2
+POST http://localhost:8080/api/v1/posts
+Authorization: Basic dXNlcjI6cGFzc3dvcmQy
+Content-Type: application/json
+
+{
+  "text": "This is the first post by User 2",
+  "tag": "#tag3"
+}
+
+### Create Post 2 by User 2
+POST http://localhost:8080/api/v1/posts
+Authorization: Basic dXNlcjI6cGFzc3dvcmQy
+Content-Type: application/json
+
+{
+  "text": "This is the second post by User 2",
+  "tag": "#tag4"
+}
+
+### Create Post 1 by User 3
+POST http://localhost:8080/api/v1/posts
+Authorization: Basic dXNlcjM6cGFzc3dvcmQz
+Content-Type: application/json
+
+{
+  "text": "This is the first post by User 3",
+  "tag": "#tag1"
+}
+
+### Create Post 2 by User 3
+POST http://localhost:8080/api/v1/posts
+Authorization: Basic dXNlcjM6cGFzc3dvcmQz
+Content-Type: application/json
+
+{
+  "text": "This is the second post by User 3",
+  "tag": "#tag2"
+}
+
+### Create Post 1 by User 4
+POST http://localhost:8080/api/v1/posts
+Authorization: Basic dXNlcjQ6cGFzc3dvcmQ0
+Content-Type: application/json
+
+{
+  "text": "This is the first post by User 4",
+  "tag": "#tag3"
+}
+
+### Create Post 2 by User 4
+POST http://localhost:8080/api/v1/posts
+Authorization: Basic dXNlcjQ6cGFzc3dvcmQ0
+Content-Type: application/json
+
+{
+  "text": "This is the second post by User 4",
+  "tag": "#tag4"
+}
