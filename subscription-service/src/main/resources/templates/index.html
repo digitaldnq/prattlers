@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Notifications</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+    <script>
+        let stompClient = null
+
+        function connect() {
+            const socket = new SockJS("/ws")
+            stompClient = Stomp.over(over)
+            stompClient.connect({}, function (frame) {
+                console.log("Conntected: " + frame)
+
+                stompClient.subscribe("/topic/messages", function (message) {
+                    showMessage(JSON.parse(message.body))
+                })
+
+                stompClient.subscribe("/topic/delivered", function (message) {
+                    showTooltip(message)
+                })
+            })
+        }
+
+        function showMessage(message) {
+            const notification = document.getElementById("notifications")
+            const messageElement = document.createElement("div")
+            messageElement.className = "notification"
+            const messageText = document.createElement("span")
+            messageText.textContent = message.message;
+            const deleteButton = document.createElement("button")
+            deleteButton.textContent = "Delete"
+            deleteButton.className = "delete-button"
+            deleteButton.onclick = function () {
+                deleteMessage(message, messageElement)
+            }
+            messageElement.appendChild(messageText)
+            messageElement.appendChild(deleteButton)
+            notification.appendChild(messageElement)
+        }
+
+        function deleteMessage(message, element) {
+            stompClient.send("/app/delivered", {}, JSON.stringify({postId: message.postId}))
+            element.remove()
+        }
+
+        function showTooltip(message) {
+            const tooltip = document.createElement("div")
+            tooltip.className = "tooltip"
+            tooltip.textContent = message.body
+            document.body.append(tooltip)
+            setTimeout(function () {
+                tooltip.remove()
+            }, 5000)
+        }
+
+        window.onload = connect
+    </script>
+</head>
+<body>
+<h1>Нотификации</h1>
+<div class="bell-container">
+    <div class="bell">
+        <span class="bell-icon">&#128276;</span>
+        <div class="dropdown">
+            <div id="notifications" class="notifications"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
