@@ -1,0 +1,33 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9093
+  datasource:
+    url: jdbc:postgresql://localhost:5432/prattlers_db
+    username: admin
+    password: admin
+    hikari:
+      schema: prattlers_schema
+      connection-init-sql: CREATE SCHEMA IF NOT EXISTS prattlers_schema
+      connection-timeout: 10000
+  jpa:
+    generate-ddl: true
+    open-in-view: false
+
+app:
+  client:
+    subscription-service:
+      base-url: http://localhost:8081
+      change-subscription: ${app.client.subscription-service.base-url}/api/v1/subscriptions
+      delete-subscription-by-id: ${app.client.subscription-service.base-url}/api/v1/subscriptions/{id}
+      username: core_service
+      password: 12345
+  kafka:
+    topic: "create-post-topic"
+  cache:
+    cache-names:
+      - posts
+      - userById
+      - userSubscriptions
+    caches:
+      userById:
+        expiry: 10m
