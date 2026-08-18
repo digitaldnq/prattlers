@@ -17,7 +17,7 @@ public abstract class AbstractTest {
             .withReuse(true)
             .withExposedPorts(6379);
 
-    protected static final KafkaContainer KAFKA = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.3"))
+    protected static final KafkaContainer KAFKA = new KafkaContainer(DockerImageName.parse("apache/kafka:3.7.2"))
             .withReuse(true);
 
     @BeforeAll
