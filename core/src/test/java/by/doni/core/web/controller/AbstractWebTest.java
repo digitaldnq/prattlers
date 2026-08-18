@@ -52,7 +52,7 @@ public abstract class AbstractWebTest extends AbstractTest {
     protected String clientUser;
 
     @Value("${app.client.subscription-service.password}")
-    protected String password;
+    protected String clientPassword;
 
     @RegisterExtension
     protected static WireMockExtension wireMockServer = WireMockExtension.newInstance()
@@ -80,7 +80,7 @@ public abstract class AbstractWebTest extends AbstractTest {
     public void stubClient() throws Exception {
         wireMockServer.stubFor(WireMock.post("/api/v1/subscriptions")
                 .withRequestBody(WireMock.equalToJson(getSubscriptionRequestBody(SubscriptionType.SUBSCRIBE)))
-                .withBasicAuth(clientUser, password)
+                .withBasicAuth(clientUser, clientPassword)
                 .willReturn(
                         WireMock.aResponse()
                                 .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -90,7 +90,7 @@ public abstract class AbstractWebTest extends AbstractTest {
 
         wireMockServer.stubFor(WireMock.post("/api/v1/subscriptions")
                 .withRequestBody(WireMock.equalToJson(getSubscriptionRequestBody(SubscriptionType.UNSUBSCRIBE)))
-                .withBasicAuth(clientUser, password)
+                .withBasicAuth(clientUser, clientPassword)
                 .willReturn(
                         WireMock.aResponse()
                                 .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -99,7 +99,7 @@ public abstract class AbstractWebTest extends AbstractTest {
                 ));
 
         wireMockServer.stubFor(WireMock.delete("/api/v1/subscriptions/1")
-                .withBasicAuth(clientUser, password)
+                .withBasicAuth(clientUser, clientPassword)
                 .willReturn(WireMock.aResponse().withStatus(HttpStatus.NO_CONTENT.value())));
     }
 
@@ -111,7 +111,7 @@ public abstract class AbstractWebTest extends AbstractTest {
 
     private String getSubscriptionResponseBody(Set<Long> subscriptionIds) throws Exception {
         return objectMapper.writeValueAsString(
-                new ChangeSubscriptionResponse(2L, subscriptionIds)
+                new ChangeSubscriptionResponse(2L , subscriptionIds)
         );
     }
 }
