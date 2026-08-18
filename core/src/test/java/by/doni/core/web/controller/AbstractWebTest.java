@@ -34,7 +34,7 @@ import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMoc
 @AutoConfigureMockMvc
 @Sql("classpath:db/init_test_data.sql")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
-public class AbstractWebTest extends AbstractTest {
+public abstract class AbstractWebTest extends AbstractTest {
 
     @Autowired
     protected MockMvc mockMvc;
