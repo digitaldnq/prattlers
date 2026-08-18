@@ -48,7 +48,7 @@ public abstract class AbstractWebTest extends AbstractTest {
     @Autowired
     protected UserRepository userRepository;
 
-    @Value("${app.client.subscription-service.username")
+    @Value("${app.client.subscription-service.username}")
     protected String clientUser;
 
     @Value("${app.client.subscription-service.password}")
